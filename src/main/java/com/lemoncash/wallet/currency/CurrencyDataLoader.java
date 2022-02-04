@@ -6,12 +6,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataLoader implements ApplicationRunner {
+public class CurrencyDataLoader implements ApplicationRunner {
 
     private final CurrencyRepository currencyRepository;
 
     @Autowired
-    public DataLoader(CurrencyRepository currencyRepository) {
+    public CurrencyDataLoader(CurrencyRepository currencyRepository) {
         this.currencyRepository = currencyRepository;
     }
 

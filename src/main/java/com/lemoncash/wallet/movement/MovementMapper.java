@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovementMapper {
 
-
     public Movement movementDTOToMovement(MovementDTO movementDTO) {
         if (movementDTO == null) {
             return null;

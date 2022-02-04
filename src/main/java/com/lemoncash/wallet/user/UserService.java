@@ -10,17 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final UserMapper userMapper;
+
+    private final WalletService walletService;
+
+    private final CurrencyService currencyService;
 
     @Autowired
-    private WalletService walletService;
-
-    @Autowired
-    private CurrencyService currencyService;
-
-    @Autowired
-    private UserMapper userMapper;
+    public UserService(UserRepository userRepository, UserMapper userMapper, WalletService walletService, CurrencyService currencyService) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+        this.walletService = walletService;
+        this.currencyService = currencyService;
+    }
 
     public User getUserById(Long id) {
         return userRepository.findById(id).get();
@@ -28,7 +32,7 @@ public class UserService {
 
     public User createUser(UserDTO userDTO) {
         User user = userRepository.save(userMapper.userDTOToUser(userDTO));
-        for (Currency currency: currencyService.getAllCurrencies()) {
+        for (Currency currency : currencyService.getAllCurrencies()) {
             Wallet wallet = new Wallet();
             wallet.setAmount(0L);
             wallet.setCurrency(currency);

@@ -8,8 +8,12 @@ import javax.validation.Valid;
 @RestController
 public class MovementController {
 
+    private final MovementService movementService;
+
     @Autowired
-    private MovementService movementService;
+    public MovementController(MovementService movementService) {
+        this.movementService = movementService;
+    }
 
     @PostMapping("/movements")
     public Movement createMovement(@Valid @RequestBody MovementDTO movement) {

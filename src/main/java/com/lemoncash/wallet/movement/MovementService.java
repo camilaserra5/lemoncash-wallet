@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovementService {
 
-    @Autowired
-    private MovementRepository movementRepository;
+    private final MovementRepository movementRepository;
+    private final MovementMapper movementMapper;
 
     @Autowired
-    private MovementMapper movementMapper;
-
+    public MovementService(MovementRepository movementRepository, MovementMapper movementMapper) {
+        this.movementRepository = movementRepository;
+        this.movementMapper = movementMapper;
+    }
 
     public Movement createMovement(MovementDTO movement) {
         return movementRepository.save(movementMapper.movementDTOToMovement(movement));
