@@ -38,7 +38,7 @@ public class UserService {
 
     private void createWalletWithCurrency(User user, Currency currency) {
         Wallet wallet = Wallet.builder()
-                .amount(0L)
+                .amount(0D)
                 .currency(currency)
                 .user(user).build();
         walletService.createWallet(wallet);

@@ -22,7 +22,7 @@ public class MovementMapperTest {
     @Test
     public void testMovementMapperReturnsCorrectDTO() {
         Type movementType = Type.deposit;
-        Long amount = 100L;
+        Double amount = 100D;
         String currencyName = "ARS";
         Long userId = 1L;
         Long movementId = 10L;

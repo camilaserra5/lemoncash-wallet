@@ -24,7 +24,7 @@ public class WalletService {
         return walletRepository.findByUserIdAndCurrencyId(userId, currencyId).orElseThrow(() -> new EntityNotFoundException(String.format("Wallet with userId %s and currencyId %s was not found", userId, currencyId)));
     }
 
-    public Wallet updateWalletAmount(Wallet wallet, Long newAmount) {
+    public Wallet updateWalletAmount(Wallet wallet, Double newAmount) {
         wallet.setAmount(newAmount);
         return walletRepository.save(wallet);
     }

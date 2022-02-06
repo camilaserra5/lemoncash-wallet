@@ -14,7 +14,7 @@ public class MovementDTO {
     @NotNull
     @Min(value = 0)
     @JsonProperty("amount")
-    private Long amount;
+    private Double amount;
 
     @NotNull
     @JsonProperty("movementType")

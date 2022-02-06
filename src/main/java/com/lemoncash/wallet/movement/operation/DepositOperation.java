@@ -22,9 +22,10 @@ public class DepositOperation extends MovementOperation {
     public Movement execute(MovementDTO movementDTO) {
         Currency currency = currencyService.getCurrencyByName(movementDTO.getCurrencyName());
         Wallet wallet = walletService.getWalletByUserIdAndCurrencyId(movementDTO.getUserId(), currency.getId());
-        long newAmount = wallet.getAmount() + movementDTO.getAmount();
-        walletService.updateWalletAmount(wallet, newAmount);
-        return generateMovement(movementDTO.getAmount(), wallet);
+        Double newAmount = wallet.getAmount() + movementDTO.getAmount();
+        Double formattedAmount = Double.valueOf(String.format(currency.getFormat(), newAmount));
+        walletService.updateWalletAmount(wallet, formattedAmount);
+        return generateMovement(formattedAmount, wallet);
     }
 
     @Override

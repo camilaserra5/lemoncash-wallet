@@ -22,7 +22,7 @@ public abstract class MovementOperation {
 
     public abstract Type getType();
 
-    protected Movement generateMovement(Long amount, Wallet wallet) {
+    protected Movement generateMovement(Double amount, Wallet wallet) {
         Movement movement = new Movement();
         movement.setMovementType(getType());
         movement.setAmount(amount);

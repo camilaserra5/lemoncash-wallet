@@ -23,11 +23,12 @@ public class ExtractionOperation extends MovementOperation {
     public Movement execute(MovementDTO movementDTO) {
         Currency currency = currencyService.getCurrencyByName(movementDTO.getCurrencyName());
         Wallet wallet = walletService.getWalletByUserIdAndCurrencyId(movementDTO.getUserId(), currency.getId());
-        long newAmount = wallet.getAmount() - movementDTO.getAmount();
+        Double newAmount = wallet.getAmount() - movementDTO.getAmount();
         if (newAmount < 0)
             throw new InsufficientFundsException(String.format("Inssufficient funds in wallet %s to perform extraction", wallet.getId()));
-        walletService.updateWalletAmount(wallet, newAmount);
-        return generateMovement(movementDTO.getAmount(), wallet);
+        Double formattedAmount = Double.valueOf(String.format(currency.getFormat(), newAmount));
+        walletService.updateWalletAmount(wallet, formattedAmount);
+        return generateMovement(formattedAmount, wallet);
     }
 
     @Override

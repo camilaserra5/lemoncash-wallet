@@ -16,8 +16,8 @@ public class CurrencyDataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        currencyRepository.save(new Currency(1L, "ARS", ""));
-        currencyRepository.save(new Currency(2L, "USDT", ""));
-        currencyRepository.save(new Currency(3L, "BTC", ""));
+        currencyRepository.save(new Currency(1L, "ARS", "%.2f"));
+        currencyRepository.save(new Currency(2L, "USDT", "%.2f"));
+        currencyRepository.save(new Currency(3L, "BTC", "%.8f"));
     }
 }

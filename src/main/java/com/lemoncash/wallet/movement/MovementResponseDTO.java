@@ -14,7 +14,7 @@ public class MovementResponseDTO {
     private Long id;
 
     @JsonProperty("amount")
-    private Long amount;
+    private Double amount;
 
     @JsonProperty("movementType")
     private Type movementType;

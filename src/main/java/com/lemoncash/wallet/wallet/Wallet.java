@@ -17,7 +17,7 @@ public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long amount;
+    private Double amount;
 
     @JoinColumn(name = "currency_id")
     @ManyToOne

@@ -16,7 +16,7 @@ public class Movement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long amount;
+    private Double amount;
     private Type movementType;
 
     @JoinColumn(name = "wallet_id")

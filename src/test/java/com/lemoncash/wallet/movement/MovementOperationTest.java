@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class MovementOperationTest {
 
-    private static final Long TEST_AMOUNT = 10L;
+    private static final Double TEST_AMOUNT = 10D;
     private static final String TEST_CURRENCY_NAME = "USDT";
     private static final Long TEST_USER_ID = 1L;
     private static final Long TEST_CURRENCY_ID = 1L;
@@ -67,7 +67,7 @@ public class MovementOperationTest {
         movementDTO.setMovementType(Type.deposit);
         movementDTO.setCurrencyName(TEST_CURRENCY_NAME);
         movementDTO.setUserId(TEST_USER_ID);
-        Wallet wallet = Wallet.builder().amount(2000L).build();
+        Wallet wallet = Wallet.builder().amount(2000D).build();
 
         when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).build());
         when(walletService.getWalletByUserIdAndCurrencyId(TEST_USER_ID, TEST_CURRENCY_ID)).thenReturn(wallet);
@@ -86,7 +86,7 @@ public class MovementOperationTest {
         movementDTO.setMovementType(Type.extraction);
         movementDTO.setCurrencyName(TEST_CURRENCY_NAME);
         movementDTO.setUserId(TEST_USER_ID);
-        Wallet wallet = Wallet.builder().amount(2000L).build();
+        Wallet wallet = Wallet.builder().amount(2000D).build();
 
         when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).build());
         when(walletService.getWalletByUserIdAndCurrencyId(TEST_USER_ID, TEST_CURRENCY_ID)).thenReturn(wallet);
@@ -105,7 +105,7 @@ public class MovementOperationTest {
         movementDTO.setMovementType(Type.extraction);
         movementDTO.setCurrencyName(TEST_CURRENCY_NAME);
         movementDTO.setUserId(TEST_USER_ID);
-        Wallet wallet = Wallet.builder().amount(0L).id(1L).build();
+        Wallet wallet = Wallet.builder().amount(0D).id(1L).build();
 
         when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).build());
         when(walletService.getWalletByUserIdAndCurrencyId(TEST_USER_ID, TEST_CURRENCY_ID)).thenReturn(wallet);
