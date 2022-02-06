@@ -27,10 +27,10 @@ public class MovementController {
 
     @GetMapping("/movements")
     public List<MovementResponseDTO> getMovements(@RequestParam(name = "user_id") Long userId,
-                                                                  @RequestParam(name = "movement_type", required = false) Type movementType,
-                                                                  @RequestParam(name = "currency_name", required = false) String currencyName,
-                                                                  @RequestParam(name = "limit", required = false) Integer limit,
-                                                                  @RequestParam(name = "offset", required = false) Integer offset) {
+                                                  @RequestParam(name = "movement_type", required = false) Type movementType,
+                                                  @RequestParam(name = "currency_name", required = false) String currencyName,
+                                                  @RequestParam(name = "limit", required = false) Integer limit,
+                                                  @RequestParam(name = "offset", required = false) Integer offset) {
         return movementService.listMovements(userId, movementType, currencyName, limit, offset);
     }
 

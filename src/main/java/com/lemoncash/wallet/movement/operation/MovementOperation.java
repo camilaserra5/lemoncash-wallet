@@ -9,8 +9,8 @@ import com.lemoncash.wallet.wallet.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class MovementOperation {
-    protected WalletService walletService;
-    protected CurrencyService currencyService;
+    protected final WalletService walletService;
+    protected final CurrencyService currencyService;
 
     @Autowired
     public MovementOperation(WalletService walletService, CurrencyService currencyService) {

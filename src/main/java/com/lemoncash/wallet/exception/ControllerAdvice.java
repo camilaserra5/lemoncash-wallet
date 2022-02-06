@@ -41,11 +41,13 @@ public class ControllerAdvice {
     public ResponseMessage entityNotFoundException(EntityNotFoundException ex) {
         return new ResponseMessage(INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
+
     @ExceptionHandler(InsufficientFundsException.class)
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ResponseMessage entityNotFoundException(InsufficientFundsException ex) {
         return new ResponseMessage(INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
+
     private ResponseErrorMessage processFieldErrors(List<FieldError> fieldErrors) {
         ResponseErrorMessage error = new ResponseErrorMessage(BAD_REQUEST.value(), "validation error");
         for (FieldError fieldError : fieldErrors) {

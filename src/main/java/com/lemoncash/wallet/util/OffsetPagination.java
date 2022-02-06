@@ -6,8 +6,6 @@ import org.springframework.data.domain.Sort;
 
 public class OffsetPagination implements Pageable {
 
-    private static final long serialVersionUID = -25822477129613575L;
-
     private final int limit;
     private final long offset;
     private final Sort sort;
