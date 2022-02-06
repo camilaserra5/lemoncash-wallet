@@ -2,10 +2,9 @@ package com.lemoncash.wallet.movement;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class MovementMapper {
 
-    public MovementResponseDTO movementToMovementResponseDTO(Movement movement) {
+    public static MovementResponseDTO movementToMovementResponseDTO(Movement movement) {
         if (movement == null) {
             return null;
         }

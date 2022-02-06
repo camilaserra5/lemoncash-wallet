@@ -2,14 +2,16 @@ package com.lemoncash.wallet.wallet;
 
 import com.lemoncash.wallet.currency.Currency;
 import com.lemoncash.wallet.user.User;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Wallet {
 
     @Id

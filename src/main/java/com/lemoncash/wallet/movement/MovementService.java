@@ -27,19 +27,16 @@ public class MovementService {
     private final MovementOperationStrategy movementOperationStrategy;
     private final WalletRepository walletRepository;
     private final CurrencyService currencyService;
-    private final MovementMapper movementMapper;
 
     @Autowired
     public MovementService(MovementRepository movementRepository,
                            MovementOperationStrategy movementOperationStrategy,
                            WalletRepository walletRepository,
-                           CurrencyService currencyService,
-                           MovementMapper movementMapper) {
+                           CurrencyService currencyService) {
         this.movementRepository = movementRepository;
         this.movementOperationStrategy = movementOperationStrategy;
         this.walletRepository = walletRepository;
         this.currencyService = currencyService;
-        this.movementMapper = movementMapper;
     }
 
     @SneakyThrows
@@ -78,6 +75,6 @@ public class MovementService {
             }
 
         }
-        return movements.stream().map(movementMapper::movementToMovementResponseDTO).collect(Collectors.toList());
+        return movements.stream().map(MovementMapper::movementToMovementResponseDTO).collect(Collectors.toList());
     }
 }
