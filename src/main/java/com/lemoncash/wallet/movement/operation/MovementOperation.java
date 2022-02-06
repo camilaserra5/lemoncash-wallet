@@ -15,7 +15,7 @@ public abstract class MovementOperation {
         this.walletService = walletService;
     }
 
-    public abstract Movement execute(MovementDTO movementDTO) throws Exception;
+    public abstract Movement execute(MovementDTO movementDTO);
 
     public abstract Type getType();
 

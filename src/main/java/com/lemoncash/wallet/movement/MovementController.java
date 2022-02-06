@@ -1,6 +1,6 @@
 package com.lemoncash.wallet.movement;
 
-import com.lemoncash.wallet.currency.Currency;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,17 +17,18 @@ public class MovementController {
         this.movementService = movementService;
     }
 
+    @SneakyThrows
     @PostMapping("/movements")
-    public Movement createMovement(@Valid @RequestBody MovementDTO movement) throws Exception {
+    public Movement createMovement(@Valid @RequestBody MovementDTO movement) {
         return movementService.executeMovement(movement);
     }
 
     @GetMapping("/movements")
-    public List<Movement> getMovements(@RequestParam(name="user_id") Long userId,
+    public List<Movement> getMovements(@RequestParam(name = "user_id") Long userId,
                                        @RequestParam(name = "movement_type", required = false) Type movementType,
-                                       @RequestParam(name="currency_name", required = false) String currencyName,
-                                       @RequestParam(name="limit", required = false) Integer limit,
-                                       @RequestParam(name="offset", required = false) Integer offset) {
+                                       @RequestParam(name = "currency_name", required = false) String currencyName,
+                                       @RequestParam(name = "limit", required = false) Integer limit,
+                                       @RequestParam(name = "offset", required = false) Integer offset) {
         return movementService.listMovements(userId, movementType, currencyName, limit, offset);
     }
 

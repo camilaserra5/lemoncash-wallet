@@ -7,6 +7,7 @@ import com.lemoncash.wallet.movement.operation.MovementOperationStrategy;
 import com.lemoncash.wallet.util.OffsetPagination;
 import com.lemoncash.wallet.wallet.Wallet;
 import com.lemoncash.wallet.wallet.WalletRepository;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,8 @@ public class MovementService {
         this.currencyService = currencyService;
     }
 
-    public Movement executeMovement(MovementDTO movementDTO) throws Exception {
+    @SneakyThrows
+    public Movement executeMovement(MovementDTO movementDTO) {
         MovementOperation movementOperation = movementOperationStrategy.getMovementOperationByType(movementDTO.getMovementType());
         if (movementOperation == null)
             throw new Exception();
@@ -62,7 +64,7 @@ public class MovementService {
         for (Wallet wallet : wallets) {
             Pageable pageable = Pageable.unpaged();
             if (limit != null && offset != null) {
-                 pageable = new OffsetPagination(offset, limit);
+                pageable = new OffsetPagination(offset, limit);
 
             }
             if (movementType != null) {

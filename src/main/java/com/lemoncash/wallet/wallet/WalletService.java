@@ -1,5 +1,6 @@
 package com.lemoncash.wallet.wallet;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ public class WalletService {
         return walletRepository.save(wallet);
     }
 
-    public Wallet getWalletByUserIdAndCurrencyId(Long userId, Long currencyId) throws Exception {
+    @SneakyThrows
+    public Wallet getWalletByUserIdAndCurrencyId(Long userId, Long currencyId) {
         List<Wallet> walletList = walletRepository.findByUserIdAndCurrencyId(userId, currencyId);
         if (walletList.size() != 1)
             throw new Exception();
