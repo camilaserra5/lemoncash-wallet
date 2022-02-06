@@ -5,13 +5,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovementMapper {
 
-    public Movement movementDTOToMovement(MovementDTO movementDTO) {
-        if (movementDTO == null) {
+    public MovementResponseDTO movementToMovementResponseDTO(Movement movement) {
+        if (movement == null) {
             return null;
         }
-        Movement movement = new Movement();
-        movement.setAmount(movementDTO.getAmount());
-        movement.setMovementType(movementDTO.getMovementType());
-        return movement;
+
+        return MovementResponseDTO.builder()
+                .movementType(movement.getMovementType())
+                .amount(movement.getAmount())
+                .currencyName(movement.getWallet().getCurrency().getName())
+                .userId(movement.getWallet().getUser().getId())
+                .id(movement.getId()).build();
     }
 }

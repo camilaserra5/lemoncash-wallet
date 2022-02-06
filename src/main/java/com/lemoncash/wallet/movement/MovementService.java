@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.Optional.empty;
 import static java.util.stream.Collectors.toList;
@@ -26,16 +27,19 @@ public class MovementService {
     private final MovementOperationStrategy movementOperationStrategy;
     private final WalletRepository walletRepository;
     private final CurrencyService currencyService;
+    private final MovementMapper movementMapper;
 
     @Autowired
     public MovementService(MovementRepository movementRepository,
                            MovementOperationStrategy movementOperationStrategy,
                            WalletRepository walletRepository,
-                           CurrencyService currencyService) {
+                           CurrencyService currencyService,
+                           MovementMapper movementMapper) {
         this.movementRepository = movementRepository;
         this.movementOperationStrategy = movementOperationStrategy;
         this.walletRepository = walletRepository;
         this.currencyService = currencyService;
+        this.movementMapper = movementMapper;
     }
 
     @SneakyThrows
@@ -51,7 +55,7 @@ public class MovementService {
         return movementRepository.save(movement);
     }
 
-    public List<Movement> listMovements(Long userId, Type movementType, String currencyName, Integer limit, Integer offset) {
+    public List<MovementResponseDTO> listMovements(Long userId, Type movementType, String currencyName, Integer limit, Integer offset) {
         Optional<Currency> optionalCurrency = currencyName != null ? Optional.of(currencyService.getCurrencyByName(currencyName)) : empty();
 
         List<Movement> movements = new ArrayList<>();
@@ -74,6 +78,6 @@ public class MovementService {
             }
 
         }
-        return movements;
+        return movements.stream().map(movementMapper::movementToMovementResponseDTO).collect(Collectors.toList());
     }
 }

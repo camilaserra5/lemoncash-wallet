@@ -2,6 +2,7 @@ package com.lemoncash.wallet.movement.operation;
 
 import com.lemoncash.wallet.currency.Currency;
 import com.lemoncash.wallet.currency.CurrencyService;
+import com.lemoncash.wallet.exception.InsufficientFundsException;
 import com.lemoncash.wallet.movement.Movement;
 import com.lemoncash.wallet.movement.MovementDTO;
 import com.lemoncash.wallet.movement.Type;
@@ -24,7 +25,7 @@ public class ExtractionOperation extends MovementOperation {
         Wallet wallet = walletService.getWalletByUserIdAndCurrencyId(movementDTO.getUserId(), currency.getId());
         long newAmount = wallet.getAmount() - movementDTO.getAmount();
         if (newAmount < 0)
-            throw new Exception();
+            throw new InsufficientFundsException(String.format("Inssufficient funds in wallet %s to perform extraction", wallet.getId()));
         walletService.updateWalletAmount(wallet, newAmount);
         return generateMovement(movementDTO.getAmount(), wallet);
     }

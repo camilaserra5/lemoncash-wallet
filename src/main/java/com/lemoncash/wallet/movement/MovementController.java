@@ -2,6 +2,7 @@ package com.lemoncash.wallet.movement;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,16 +20,17 @@ public class MovementController {
 
     @SneakyThrows
     @PostMapping("/movements")
-    public Movement createMovement(@Valid @RequestBody MovementDTO movement) {
-        return movementService.executeMovement(movement);
+    public ResponseEntity<String> createMovement(@Valid @RequestBody MovementDTO movementDTO) {
+        Movement movement = movementService.executeMovement(movementDTO);
+        return ResponseEntity.ok(String.format("Movement %s performed", movement.getId()));
     }
 
     @GetMapping("/movements")
-    public List<Movement> getMovements(@RequestParam(name = "user_id") Long userId,
-                                       @RequestParam(name = "movement_type", required = false) Type movementType,
-                                       @RequestParam(name = "currency_name", required = false) String currencyName,
-                                       @RequestParam(name = "limit", required = false) Integer limit,
-                                       @RequestParam(name = "offset", required = false) Integer offset) {
+    public List<MovementResponseDTO> getMovements(@RequestParam(name = "user_id") Long userId,
+                                                                  @RequestParam(name = "movement_type", required = false) Type movementType,
+                                                                  @RequestParam(name = "currency_name", required = false) String currencyName,
+                                                                  @RequestParam(name = "limit", required = false) Integer limit,
+                                                                  @RequestParam(name = "offset", required = false) Integer offset) {
         return movementService.listMovements(userId, movementType, currencyName, limit, offset);
     }
 

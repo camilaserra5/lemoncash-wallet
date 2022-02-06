@@ -1,6 +1,7 @@
 package com.lemoncash.wallet.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,8 +17,9 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@Valid @RequestBody UserDTO user) {
-        return userService.createUser(user);
+    public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO userDTO) {
+        User user = userService.createUser(userDTO);
+        return ResponseEntity.ok(String.format("User %s created", user.getId()));
     }
 
     @GetMapping("/users/{id}")
