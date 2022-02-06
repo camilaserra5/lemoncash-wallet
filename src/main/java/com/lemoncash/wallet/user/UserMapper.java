@@ -1,5 +1,6 @@
 package com.lemoncash.wallet.user;
 
+import com.lemoncash.wallet.util.PasswordEncrypter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,7 +14,7 @@ public class UserMapper {
         return User.builder().firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .username(userDTO.getUsername())
-                .password(userDTO.getPassword())
+                .password(PasswordEncrypter.encrypt(userDTO.getPassword()))
                 .email(userDTO.getEmail()).build();
 
     }
