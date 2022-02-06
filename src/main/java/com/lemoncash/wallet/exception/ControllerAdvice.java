@@ -50,11 +50,4 @@ public class ControllerAdvice {
         return error;
     }
 
-    /*@ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(BAD_REQUEST)
-    public ResponseMessage handleBadRequestError(MethodArgumentNotValidException ex) {
-        return new ResponseMessage(BAD_REQUEST.value(), ex.getMessage());
-    }*/
-
-
 }
