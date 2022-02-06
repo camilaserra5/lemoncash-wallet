@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.Optional.empty;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -53,28 +52,32 @@ public class MovementService {
     }
 
     public List<MovementResponseDTO> listMovements(Long userId, Type movementType, String currencyName, Integer limit, Integer offset) {
-        Optional<Currency> optionalCurrency = currencyName != null ? Optional.of(currencyService.getCurrencyByName(currencyName)) : empty();
-
         List<Movement> movements = new ArrayList<>();
         List<Wallet> wallets = walletRepository.findByUserId(userId);
-        if (optionalCurrency.isPresent()) {
-            wallets = wallets.stream()
-                    .filter(wallet -> optionalCurrency.get().equals(wallet.getCurrency()))
-                    .collect(toList());
-        }
-        for (Wallet wallet : wallets) {
-            Pageable pageable = Pageable.unpaged();
-            if (limit != null && offset != null) {
-                pageable = new OffsetPagination(offset, limit);
 
-            }
-            if (movementType != null) {
-                movements.addAll(movementRepository.findByWalletIdAndMovementType(wallet.getId(), movementType, pageable));
-            } else {
-                movements.addAll(movementRepository.findByWalletId(wallet.getId(), pageable));
-            }
+        wallets = filterWalletsByOptionalCurrency(wallets, Optional.ofNullable(currencyName));
 
-        }
+        Pageable pageable = getPageable(limit, offset);
+        wallets.forEach(wallet -> movements.addAll(movementRepository.findByWalletIdAndOptionalMovementType(wallet.getId(), Optional.ofNullable(movementType), pageable)));
         return movements.stream().map(MovementMapper::movementToMovementResponseDTO).collect(Collectors.toList());
+    }
+
+    private Pageable getPageable(Integer limit, Integer offset) {
+        Pageable pageable = Pageable.unpaged();
+        if (limit != null && offset != null) {
+            pageable = new OffsetPagination(offset, limit);
+        }
+        return pageable;
+    }
+
+    private List<Wallet> filterWalletsByOptionalCurrency(List<Wallet> wallets, Optional<String> currencyName) {
+        if (currencyName.isEmpty()) {
+            return wallets;
+        }
+
+        Currency currency = currencyService.getCurrencyByName(currencyName.get());
+        return wallets.stream()
+                .filter(wallet -> currency.equals(wallet.getCurrency()))
+                .collect(toList());
     }
 }

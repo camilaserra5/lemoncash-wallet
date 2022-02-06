@@ -35,14 +35,16 @@ public class UserService {
 
     public User createUser(UserDTO userDTO) {
         User user = userRepository.save(userMapper.userDTOToUser(userDTO));
-        for (Currency currency : currencyService.getAllCurrencies()) {
-            Wallet wallet = new Wallet();
-            wallet.setAmount(0L);
-            wallet.setCurrency(currency);
-            wallet.setUser(user);
-            walletService.createWallet(wallet);
-        }
+        currencyService.getAllCurrencies().forEach(currency -> createWalletWithCurrency(user, currency));
         return user;
+    }
+
+    private void createWalletWithCurrency(User user, Currency currency) {
+        Wallet wallet = Wallet.builder()
+                .amount(0L)
+                .currency(currency)
+                .user(user).build();
+        walletService.createWallet(wallet);
     }
 
 }
