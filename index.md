@@ -1,17 +1,17 @@
 # Description
-Lemoncash es una plataforma que permite a los usuarios administrar distintos tipos de activos.
+Lemoncash is a platform that allows users to manage different types of assets.
 
-Queremos poder dar de alta usuarios y permitir que los mismos puedan realizar movimientos en sus billeteras. Para esto, se debe implementar una app que exponga una API REST para poder permitir estos casos de uso.
+We want to be able to register users and allow them to make movements in their wallets. For this, an app that exposes a REST API must be implemented in order to allow these use cases.
 
-Se debe tener en cuenta que al dar de alta un usuario, se deben crear **tres billeteras** (tres
-monedas diferentes) asociadas a dicho usuario con un monto inicial de 0 en cada una.
-Las monedas son ARS, BTC, USDT.
+It must be taken into account that when registering a user, **three wallets** must be created (three
+different currencies) associated to said user with an initial amount of 0 in each one.
+The currencies are ARS, BTC, USDT.
 
-Se debe contemplar los decimales significativos de cada moneda:
+The significant decimals of each currency must be considered:
 
-- ARS: 2 decimales. Ejemplo: 1000.55
-- USDT: 2 decimales.
-- BTC: 8 decimales. Ejemplo 0.00005241
+- ARS: 2 decimals. Example: 1000.55
+- USDT: 2 decimal places.
+- BTC: 8 decimal places. Example 0.00005241
 
 # Documentation
 [Technical Documentation](./technical-documentation.html).
