@@ -1,5 +1,6 @@
 package com.lemoncash.wallet.movement.operation;
 
+import com.lemoncash.wallet.currency.CurrencyService;
 import com.lemoncash.wallet.movement.Movement;
 import com.lemoncash.wallet.movement.MovementDTO;
 import com.lemoncash.wallet.movement.Type;
@@ -9,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class MovementOperation {
     protected WalletService walletService;
+    protected CurrencyService currencyService;
 
     @Autowired
-    public MovementOperation(WalletService walletService) {
+    public MovementOperation(WalletService walletService, CurrencyService currencyService) {
         this.walletService = walletService;
+        this.currencyService = currencyService;
     }
 
     public abstract Movement execute(MovementDTO movementDTO);

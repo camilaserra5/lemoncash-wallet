@@ -19,8 +19,8 @@ public class MovementDTO {
     private Type movementType;
 
     @NotNull
-    @JsonProperty("currencyId")
-    private Long currencyId;
+    @JsonProperty("currencyName")
+    private String currencyName;
 
     @NotNull
     @JsonProperty("userId")

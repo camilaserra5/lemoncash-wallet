@@ -1,5 +1,7 @@
 package com.lemoncash.wallet.movement.operation;
 
+import com.lemoncash.wallet.currency.Currency;
+import com.lemoncash.wallet.currency.CurrencyService;
 import com.lemoncash.wallet.movement.Movement;
 import com.lemoncash.wallet.movement.MovementDTO;
 import com.lemoncash.wallet.movement.Type;
@@ -11,14 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DepositOperation extends MovementOperation {
 
-    public DepositOperation(WalletService walletService) {
-        super(walletService);
+    public DepositOperation(WalletService walletService, CurrencyService currencyService) {
+        super(walletService, currencyService);
     }
 
     @SneakyThrows
     @Override
     public Movement execute(MovementDTO movementDTO) {
-        Wallet wallet = walletService.getWalletByUserIdAndCurrencyId(movementDTO.getUserId(), movementDTO.getCurrencyId());
+        Currency currency = currencyService.getCurrencyByName(movementDTO.getCurrencyName());
+        Wallet wallet = walletService.getWalletByUserIdAndCurrencyId(movementDTO.getUserId(), currency.getId());
         long newAmount = wallet.getAmount() + movementDTO.getAmount();
         walletService.updateWalletAmount(wallet, newAmount);
         return generateMovement(movementDTO.getAmount(), wallet);
