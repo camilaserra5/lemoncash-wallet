@@ -18,4 +18,8 @@ public class CurrencyService {
     public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
     }
+
+    public Currency getCurrencyByName(String currencyName) {
+        return currencyRepository.findByName(currencyName);
+    }
 }
