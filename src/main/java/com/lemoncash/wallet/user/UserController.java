@@ -3,6 +3,8 @@ package com.lemoncash.wallet.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class UserController {
 
@@ -14,7 +16,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody UserDTO user) {
+    public User createUser(@Valid @RequestBody UserDTO user) {
         return userService.createUser(user);
     }
 

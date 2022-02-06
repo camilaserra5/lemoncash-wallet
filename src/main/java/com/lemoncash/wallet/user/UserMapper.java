@@ -10,10 +10,12 @@ public class UserMapper {
             return null;
         }
 
-        User user = new User();
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-        return user;
+        return User.builder().firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .username(userDTO.getUsername())
+                .password(userDTO.getPassword())
+                .email(userDTO.getEmail()).build();
+
     }
 
 }

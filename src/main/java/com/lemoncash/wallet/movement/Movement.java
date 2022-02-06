@@ -1,12 +1,10 @@
 package com.lemoncash.wallet.movement;
 
+import com.lemoncash.wallet.wallet.Wallet;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
@@ -19,5 +17,8 @@ public class Movement {
     private Long id;
     private Long amount;
     private Type movementType;
+    @JoinColumn(name = "wallet_id")
+    @ManyToOne
+    private Wallet wallet;
 
 }
