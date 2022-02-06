@@ -2,6 +2,7 @@ package com.lemoncash.wallet.movement;
 
 import com.lemoncash.wallet.currency.Currency;
 import com.lemoncash.wallet.currency.CurrencyService;
+import com.lemoncash.wallet.exception.UnrecognizedMovementType;
 import com.lemoncash.wallet.movement.operation.MovementOperation;
 import com.lemoncash.wallet.movement.operation.MovementOperationStrategy;
 import com.lemoncash.wallet.util.OffsetPagination;
@@ -42,7 +43,7 @@ public class MovementService {
     public Movement executeMovement(MovementDTO movementDTO) {
         MovementOperation movementOperation = movementOperationStrategy.getMovementOperationByType(movementDTO.getMovementType());
         if (movementOperation == null)
-            throw new Exception();
+            throw new UnrecognizedMovementType(String.format("Movement type '%s' does not have a movement operation implemented", movementDTO.getMovementType()));
         Movement movement = movementOperation.execute(movementDTO);
         return this.createMovement(movement);
     }

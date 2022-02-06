@@ -14,16 +14,13 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper;
-
     private final WalletService walletService;
 
     private final CurrencyService currencyService;
 
     @Autowired
-    public UserService(UserRepository userRepository, UserMapper userMapper, WalletService walletService, CurrencyService currencyService) {
+    public UserService(UserRepository userRepository, WalletService walletService, CurrencyService currencyService) {
         this.userRepository = userRepository;
-        this.userMapper = userMapper;
         this.walletService = walletService;
         this.currencyService = currencyService;
     }
@@ -34,7 +31,7 @@ public class UserService {
     }
 
     public User createUser(UserDTO userDTO) {
-        User user = userRepository.save(userMapper.userDTOToUser(userDTO));
+        User user = userRepository.save(UserMapper.userDTOToUser(userDTO));
         currencyService.getAllCurrencies().forEach(currency -> createWalletWithCurrency(user, currency));
         return user;
     }

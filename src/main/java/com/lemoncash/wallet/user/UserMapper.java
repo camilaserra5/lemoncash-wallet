@@ -1,12 +1,10 @@
 package com.lemoncash.wallet.user;
 
 import com.lemoncash.wallet.util.PasswordEncrypter;
-import org.springframework.stereotype.Component;
 
-@Component
 public class UserMapper {
 
-    public User userDTOToUser(UserDTO userDTO) {
+    public static User userDTOToUser(UserDTO userDTO) {
         if (userDTO == null) {
             return null;
         }
