@@ -1,10 +1,9 @@
 package com.lemoncash.wallet.wallet;
 
+import com.lemoncash.wallet.exception.EntityNotFoundException;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class WalletService {
@@ -22,10 +21,7 @@ public class WalletService {
 
     @SneakyThrows
     public Wallet getWalletByUserIdAndCurrencyId(Long userId, Long currencyId) {
-        List<Wallet> walletList = walletRepository.findByUserIdAndCurrencyId(userId, currencyId);
-        if (walletList.size() != 1)
-            throw new Exception();
-        return walletList.get(0);
+        return walletRepository.findByUserIdAndCurrencyId(userId, currencyId).orElseThrow(() -> new EntityNotFoundException(String.format("Wallet with userId %s and currencyId %s was not found", userId, currencyId)));
     }
 
     public Wallet updateWalletAmount(Wallet wallet, Long newAmount) {
