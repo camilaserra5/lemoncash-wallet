@@ -69,13 +69,13 @@ public class MovementOperationTest {
         movementDTO.setUserId(TEST_USER_ID);
         Wallet wallet = Wallet.builder().amount(2000D).build();
 
-        when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).build());
+        when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).format("%.2f").build());
         when(walletService.getWalletByUserIdAndCurrencyId(TEST_USER_ID, TEST_CURRENCY_ID)).thenReturn(wallet);
 
         Movement movement = depositOperation.execute(movementDTO);
 
         assertEquals(Type.deposit, movement.getMovementType());
-        assertEquals(TEST_AMOUNT, movement.getAmount());
+        assertEquals(2000D + TEST_AMOUNT, movement.getAmount());
         assertEquals(wallet, movement.getWallet());
     }
 
@@ -88,13 +88,13 @@ public class MovementOperationTest {
         movementDTO.setUserId(TEST_USER_ID);
         Wallet wallet = Wallet.builder().amount(2000D).build();
 
-        when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).build());
+        when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).format("%.2f").build());
         when(walletService.getWalletByUserIdAndCurrencyId(TEST_USER_ID, TEST_CURRENCY_ID)).thenReturn(wallet);
 
         Movement movement = extractionOperation.execute(movementDTO);
 
         assertEquals(Type.extraction, movement.getMovementType());
-        assertEquals(TEST_AMOUNT, movement.getAmount());
+        assertEquals(2000D - TEST_AMOUNT, movement.getAmount());
         assertEquals(wallet, movement.getWallet());
     }
 
@@ -107,7 +107,7 @@ public class MovementOperationTest {
         movementDTO.setUserId(TEST_USER_ID);
         Wallet wallet = Wallet.builder().amount(0D).id(1L).build();
 
-        when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).build());
+        when(currencyService.getCurrencyByName(TEST_CURRENCY_NAME)).thenReturn(Currency.builder().id(TEST_CURRENCY_ID).format("%.2f").build());
         when(walletService.getWalletByUserIdAndCurrencyId(TEST_USER_ID, TEST_CURRENCY_ID)).thenReturn(wallet);
 
         InsufficientFundsException thrown = assertThrows(
