@@ -4,7 +4,6 @@
 ### TODO
 - Add docker and document
 - Add more unit test coverage
-- Add e2e tests
 - Add UML for classes
 - Add javadoc
 
