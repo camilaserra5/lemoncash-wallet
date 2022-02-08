@@ -3,6 +3,8 @@ package com.lemoncash.wallet.movement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @Builder
@@ -24,4 +26,7 @@ public class MovementResponseDTO {
 
     @JsonProperty("userId")
     private Long userId;
+
+    @JsonProperty("timestamp")
+    private Timestamp timestamp;
 }

@@ -12,6 +12,7 @@ public class MovementMapper {
                 .amount(movement.getAmount())
                 .currencyName(movement.getWallet().getCurrency().getName())
                 .userId(movement.getWallet().getUser().getId())
+                .timestamp(movement.getTimestamp())
                 .id(movement.getId()).build();
     }
 }

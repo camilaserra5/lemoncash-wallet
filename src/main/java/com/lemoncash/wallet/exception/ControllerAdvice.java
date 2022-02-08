@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import javax.validation.ConstraintViolationException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,12 @@ public class ControllerAdvice {
     @ResponseStatus(BAD_REQUEST)
     public ResponseMessage handleMissingParams(MissingServletRequestParameterException ex) {
         return new ResponseMessage(BAD_REQUEST.value(), String.format("'%s' parameter is missing", ex.getParameterName()));
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(BAD_REQUEST)
+    public ResponseMessage handleConstraintValidation(ConstraintViolationException ex) {
+        return new ResponseMessage(BAD_REQUEST.value(), ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

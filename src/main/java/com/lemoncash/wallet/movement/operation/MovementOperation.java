@@ -8,6 +8,8 @@ import com.lemoncash.wallet.wallet.Wallet;
 import com.lemoncash.wallet.wallet.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Timestamp;
+
 public abstract class MovementOperation {
     protected final WalletService walletService;
     protected final CurrencyService currencyService;
@@ -27,6 +29,7 @@ public abstract class MovementOperation {
         movement.setMovementType(getType());
         movement.setAmount(amount);
         movement.setWallet(wallet);
+        movement.setTimestamp(new Timestamp(System.currentTimeMillis()));
         return movement;
     }
 

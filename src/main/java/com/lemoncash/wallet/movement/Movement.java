@@ -4,6 +4,7 @@ import com.lemoncash.wallet.wallet.Wallet;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -22,5 +23,7 @@ public class Movement {
     @JoinColumn(name = "wallet_id")
     @ManyToOne
     private Wallet wallet;
+
+    private Timestamp timestamp;
 
 }
