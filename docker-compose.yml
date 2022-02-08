@@ -1,0 +1,21 @@
+version: "3"
+services:
+  lemoncash:
+    image: lemoncash
+    ports:
+      - 8080:8080
+    networks:
+      - lemoncash-mysql
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+    image: mysql:8
+    networks:
+      - lemoncash-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=lemoncash_db
+
+networks:
+  lemoncash-mysql: 
