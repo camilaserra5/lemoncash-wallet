@@ -1,10 +1,10 @@
-# Lemon Cash 
+# Lemon Cash
+
 ## [Coding Challenge Documentation](https://camilaserra5.github.io/lemoncash-wallet/)
 
-### TODO
-- Add docker and document
-- Add more unit test coverage
-- Add e2e tests
-- Add UML for classes
+### Things to improve/add in the future
+
+- Increase unit test coverage
+- Add UML for classes to documentation
 - Add javadoc
 
