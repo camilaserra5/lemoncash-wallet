@@ -18,6 +18,10 @@ You need to have [**Docker**](https://docs.docker.com/engine/install/ubuntu/) an
 
 Your app should be running fine in the 8080 port. You can see example requests in the [User Manual](./user-manual.html).
 
+## Tests
+- **Unit test:** see `src/test/java` or run `./gradlew test`
+- **E2E test:** see `Lemon Cash.postman_collection.json`
+
 ## Classes UML
 TO-DO
 
